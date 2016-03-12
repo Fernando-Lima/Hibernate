@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,7 +24,7 @@ import lombok.ToString;
 @ToString(of = { "codigo", "nome" })
 // comparando pessoas pelo codigo e pelo nome
 // @Table (name = "CAD_ALUNO")
-public class Aluno {
+public class Aluno implements MinhaEntidade {
 
 	@Id // cria a chave primaria no banco
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // id campo auto
@@ -37,6 +38,16 @@ public class Aluno {
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP) // timestamp data e hora
 	private Date data;
+	@ManyToOne
+	private Cidade cidade;
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
 
 	public Long getCodigo() {
 		return codigo;
